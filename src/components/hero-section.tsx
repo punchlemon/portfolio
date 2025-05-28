@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function HeroSection() {
   return (
@@ -18,11 +19,11 @@ export function HeroSection() {
         <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
           Full-stack Developer
         </p>
-        <Button size="lg" className="mr-4">
-          View My Work
+        <Button size="lg" className="mr-4" asChild>
+          <Link href="/projects">View My Work</Link>
         </Button>
-        <Button variant="outline" size="lg">
-          Contact Me
+        <Button variant="outline" size="lg" asChild>
+          <Link href="/contact">Contact Me</Link>
         </Button>
       </motion.div>
     </section>
