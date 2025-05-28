@@ -2,8 +2,18 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function Header() {
+  const pathname = usePathname();
+
+  const isActive = (path: string) => {
+    if (path === "/" && pathname === "/") return true;
+    if (path !== "/" && pathname.startsWith(path)) return true;
+    return false;
+  };
+
   return (
     <motion.header
       initial={{ opacity: 0, y: -20 }}
@@ -12,28 +22,62 @@ export function Header() {
       className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
     >
       <div className="container mx-auto flex h-14 items-center justify-between px-4">
+        {/* Logo */}
         <div className="flex items-center space-x-2">
-          <span className="text-xl font-bold">Reiji</span>
+          <Link
+            href="/"
+            className="text-xl font-bold hover:text-primary transition-colors"
+          >
+            Reiji
+          </Link>
         </div>
-        
+
+        {/* Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
-          <a href="#about" className="text-sm font-medium hover:text-primary transition-colors">
+          <Link
+            href="/"
+            className={`text-sm font-medium transition-colors ${
+              isActive("/")
+                ? "text-primary"
+                : "text-muted-foreground hover:text-primary"
+            }`}
+          >
+            Home
+          </Link>
+          <Link
+            href="/#about"
+            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+          >
             About
-          </a>
-          <a href="#projects" className="text-sm font-medium hover:text-primary transition-colors">
+          </Link>
+          <Link
+            href="/projects"
+            className={`text-sm font-medium transition-colors ${
+              isActive("/projects")
+                ? "text-primary"
+                : "text-muted-foreground hover:text-primary"
+            }`}
+          >
             Projects
-          </a>
-          <a href="#skills" className="text-sm font-medium hover:text-primary transition-colors">
-            Skills
-          </a>
-          <a href="#contact" className="text-sm font-medium hover:text-primary transition-colors">
+          </Link>
+          <Link
+            href="/contact"
+            className={`text-sm font-medium transition-colors ${
+              isActive("/contact")
+                ? "text-primary"
+                : "text-muted-foreground hover:text-primary"
+            }`}
+          >
             Contact
-          </a>
+          </Link>
         </nav>
 
-        <Button variant="outline" size="sm">
-          Resume
-        </Button>
+        {/* Mobile Menu Button (将来的にモバイル対応時に使用) */}
+        <div className="md:hidden">
+          <Button variant="ghost" size="sm">
+            Menu
+          </Button>
+        </div>
       </div>
     </motion.header>
   );
