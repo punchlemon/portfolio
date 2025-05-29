@@ -14,75 +14,50 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "ecommerce-platform",
-    title: "E-commerce Platform",
-    description: "Next.jsとStripeを使った現代的なECサイト",
-    longDescription: "フルスタックのEコマースプラットフォームで、ユーザー認証、商品管理、決済処理、注文管理機能を含んでいます。レスポンシブデザインと高いパフォーマンスを実現しています。",
-    technologies: ["Next.js", "TypeScript", "Stripe", "Prisma", "PostgreSQL"],
+    id: "picklet",
+    title: "Picklet",
+    description: "洋服の着用履歴を管理する衣類コーディネートアプリ",
+    longDescription: "Pickletは、普段着る洋服の管理と着用履歴を記録できるアプリです。どの服をいつ着たかを追跡し、着用回数や最後に着た日付を可視化することで、効率的なワードローブ管理をサポートします。直感的なUIでコーディネートの記録と分析を簡単に行えます。",
+    technologies: ["TypeScript", "React", "Local Storage", "CSS Modules"],
     features: [
-      "ユーザー認証・認可",
-      "商品カタログ・検索",
-      "ショッピングカート",
-      "Stripe決済統合",
-      "注文履歴管理",
-      "管理者ダッシュボード"
+      "洋服の着用履歴記録",
+      "着用回数の自動カウント",
+      "最終着用日の追跡",
+      "着用頻度の可視化",
+      // "コーディネート履歴の確認"
     ],
     challenges: [
-      "複雑な在庫管理システムの実装",
-      "セキュアな決済フローの構築",
-      "パフォーマンス最適化"
+      "ローカルストレージでの効率的なデータ管理",
+      "直感的なUI/UXデザインの実装",
+      // "将来のサーバー連携を考慮した設計"
     ],
-    images: ["/projects/ecommerce-1.jpg", "/projects/ecommerce-2.jpg"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/example/ecommerce",
-    delay: 0.1,
+    images: ["/projects/picklet-1.jpg", "/projects/picklet-2.jpg"],
+    githubUrl: "https://github.com/picklet-team/picklet",
+    delay: 0.05,
   },
   {
-    id: "task-management",
-    title: "Task Management App",
-    description: "リアルタイム機能付きのタスク管理アプリ",
-    longDescription: "チーム向けのリアルタイムタスク管理アプリケーション。Socket.ioを使用してリアルタイム更新を実現し、直感的なドラッグ&ドロップインターフェースを提供します。",
-    technologies: ["React", "Node.js", "Socket.io", "MongoDB", "Express"],
+    id: "bevy-game",
+    title: "Bevy Game",
+    description: "Rustで作られた高性能ゲームエンジンを使用したゲーム開発",
+    longDescription: "Bevyゲームエンジンを使用したゲーム開発プロジェクト。Rustの安全性とパフォーマンスを活かし、モダンなゲーム開発手法を実践しています。ECSアーキテクチャを採用し、効率的なゲームループとコンポーネントシステムを構築。開発過程をYouTube動画で記録・共有しています。",
+    technologies: ["Rust", "Bevy Engine", "ECS Architecture", "Game Development"],
     features: [
-      "リアルタイム更新",
-      "ドラッグ&ドロップ操作",
-      "チームコラボレーション",
-      "タスクの優先度設定",
-      "期限管理",
-      "プロジェクト管理"
+      "ECSベースのゲームアーキテクチャ",
+      "高性能な描画システム",
+      "物理演算エンジン統合",
+      "モジュラーコンポーネント設計",
+      "クロスプラットフォーム対応",
+      "開発過程の動画記録"
     ],
     challenges: [
-      "リアルタイム同期の実装",
-      "複雑なUI状態管理",
-      "スケーラブルなアーキテクチャ設計"
+      "Rustの所有権システムとの格闘",
+      "ゲームループの最適化",
+      "ECSパターンの効果的な実装",
+      "開発過程の効果的な記録・共有"
     ],
-    images: ["/projects/task-1.jpg", "/projects/task-2.jpg"],
-    liveUrl: "https://example.com/tasks",
-    githubUrl: "https://github.com/example/task-app",
-    delay: 0.2,
-  },
-  {
-    id: "weather-dashboard",
-    title: "Weather Dashboard",
-    description: "APIを活用した天気予報ダッシュボード",
-    longDescription: "複数の天気APIを統合した包括的な天気ダッシュボード。インタラクティブなチャートと地図表示で、詳細な気象情報を視覚化します。",
-    technologies: ["React", "Chart.js", "OpenWeatherMap API", "Mapbox"],
-    features: [
-      "現在の天気情報",
-      "7日間の天気予報",
-      "インタラクティブな地図",
-      "気温・湿度・風速チャート",
-      "位置情報ベースの検索",
-      "お気に入り地点の保存"
-    ],
-    challenges: [
-      "複数APIの統合",
-      "リアルタイムデータの処理",
-      "レスポンシブなチャート表示"
-    ],
-    images: ["/projects/weather-1.jpg", "/projects/weather-2.jpg"],
-    liveUrl: "https://example.com/weather",
-    githubUrl: "https://github.com/example/weather-dashboard",
-    delay: 0.3,
+    images: ["/projects/bevy-game-1.jpg", "/projects/bevy-game-2.jpg"],
+    githubUrl: "https://github.com/picklet-team/bevy-game",
+    liveUrl: "https://www.youtube.com/watch?v=KUKAEwzjxfY&list=PL2PifUeuI0TDeg8msv-R85gxSZbkj7sVo",
+    delay: 0.075,
   },
 ];
