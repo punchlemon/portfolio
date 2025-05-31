@@ -1,9 +1,10 @@
-export interface Video {
-  title: string;           // 動画セクションのタイトル
-  embedId: string;         // YouTube埋め込みID
-  url?: string;           // 単体動画URL
-  playlistUrl?: string;   // プレイリストURL
-  playlistText?: string;  // プレイリストボタンのテキスト
+export interface Preview {
+  type: 'website' | 'video';
+  title: string;
+  url?: string;
+  embedId?: string;  // YouTube用
+  playlistUrl?: string;
+  playlistText?: string;
 }
 
 export interface Project {
@@ -19,8 +20,8 @@ export interface Project {
   liveUrl?: string;
   delay: number;
   
-  // Video情報を追加
-  video?: Video;
+  // 統合されたプレビュー情報
+  preview?: Preview;
 }
 
 export const projects: Project[] = [
@@ -70,14 +71,15 @@ export const projects: Project[] = [
     images: ["/projects/bevy-game-1.jpg", "/projects/bevy-game-2.jpg"],
     githubUrl: "https://github.com/picklet-team/bevy-game",
     liveUrl: "https://www.youtube.com/watch?v=KUKAEwzjxfY&list=PL2PifUeuI0TDeg8msv-R85gxSZbkj7sVo",
-    video: {
-      title: "Bevy Game Development",
-      embedId: "KUKAEwzjxfY",
-      url: "https://www.youtube.com/watch?v=KUKAEwzjxfY",
-      playlistUrl: "https://www.youtube.com/playlist?list=PL2PifUeuI0TDeg8msv-R85gxSZbkj7sVo",
-      playlistText: "Bevy Game Development Playlist"
-    },
     delay: 0.075,
+    preview: {
+      type: 'video',
+      title: 'Bevy Game Development',
+      embedId: 'KUKAEwzjxfY',
+      url: 'https://www.youtube.com/watch?v=KUKAEwzjxfY',
+      playlistUrl: 'https://www.youtube.com/playlist?list=PL2PifUeuI0TDeg8msv-R85gxSZbkj7sVo',
+      playlistText: 'Bevy Game Development Playlist'
+    }
   },
   {
     id: "pension-website",
@@ -103,5 +105,10 @@ export const projects: Project[] = [
     images: ["/projects/pension-1.jpg", "/projects/pension-2.jpg"],
     liveUrl: "https://visionary-lebkuchen-725bb0.netlify.app/",
     delay: 0.1,
+    preview: {
+      type: 'website',
+      title: 'サイトプレビュー',
+      url: 'https://visionary-lebkuchen-725bb0.netlify.app/'
+    }
   },
 ];
