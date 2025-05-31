@@ -55,6 +55,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </a>
               </Button>
             )}
+            {/* Video ボタンを追加 */}
+            {project.video?.url && (
+              <Button variant="outline" asChild>
+                <a href={project.video.url} target="_blank" rel="noopener noreferrer">
+                  YouTube
+                </a>
+              </Button>
+            )}
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -66,7 +74,43 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </div>
 
-        {/* Project Details */}
+        {/* Video Section - 修正版 */}
+        {project.video && (
+          <Card className="mb-12">
+            <CardHeader>
+              <CardTitle>{project.video.title}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="aspect-video">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={`https://www.youtube-nocookie.com/embed/${project.video.embedId}?rel=0&modestbranding=1`}
+                  title={project.video.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="rounded-lg"
+                />
+              </div>
+              {project.video.playlistUrl && (
+                <div className="mt-4">
+                  <Button variant="outline" asChild>
+                    <a 
+                      href={project.video.playlistUrl}
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
+                      {project.video.playlistText || "プレイリストを見る"}
+                    </a>
+                  </Button>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        )}
+
+        {/* 既存のコンテンツ */}
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           <Card>
             <CardHeader>

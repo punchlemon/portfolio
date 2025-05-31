@@ -1,3 +1,11 @@
+export interface Video {
+  title: string;           // 動画セクションのタイトル
+  embedId: string;         // YouTube埋め込みID
+  url?: string;           // 単体動画URL
+  playlistUrl?: string;   // プレイリストURL
+  playlistText?: string;  // プレイリストボタンのテキスト
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -6,10 +14,13 @@ export interface Project {
   technologies: string[];
   features: string[];
   challenges: string[];
-  liveUrl?: string;
-  githubUrl?: string;
   images: string[];
-  delay?: number;
+  githubUrl?: string;
+  liveUrl?: string;
+  delay: number;
+  
+  // Video情報を追加
+  video?: Video;
 }
 
 export const projects: Project[] = [
@@ -17,19 +28,20 @@ export const projects: Project[] = [
     id: "picklet",
     title: "Picklet",
     description: "洋服の着用履歴を管理する衣類コーディネートアプリ",
-    longDescription: "Pickletは、普段着る洋服の管理と着用履歴を記録できるアプリです。どの服をいつ着たかを追跡し、着用回数や最後に着た日付を可視化することで、効率的なワードローブ管理をサポートします。直感的なUIでコーディネートの記録と分析を簡単に行えます。",
-    technologies: ["TypeScript", "React", "Local Storage", "CSS Modules"],
+    longDescription: "Pickletは、普段着る洋服の管理と着用履歴を記録できるiOSアプリです。どの服をいつ着たかを追跡し、着用回数や最後に着た日付を可視化することで、効率的なワードローブ管理をサポートします。SwiftUIの宣言的UIで直感的なコーディネート記録と分析を実現しています。",
+    technologies: ["Swift", "SwiftUI", "SQLite", "iOS SDK"],
     features: [
       "洋服の着用履歴記録",
       "着用回数の自動カウント",
       "最終着用日の追跡",
       "着用頻度の可視化",
-      // "コーディネート履歴の確認"
+      "SwiftUIによる宣言的UI",
+      "SQLiteによるローカルデータ管理"
     ],
     challenges: [
-      "ローカルストレージでの効率的なデータ管理",
-      "直感的なUI/UXデザインの実装",
-      // "将来のサーバー連携を考慮した設計"
+      "SQLiteでの効率的なデータベース設計",
+      "SwiftUIの宣言的UIパラダイムの活用",
+      "将来のPostgreSQL移行を考慮した設計"
     ],
     images: ["/projects/picklet-1.jpg", "/projects/picklet-2.jpg"],
     githubUrl: "https://github.com/picklet-team/picklet",
@@ -58,6 +70,38 @@ export const projects: Project[] = [
     images: ["/projects/bevy-game-1.jpg", "/projects/bevy-game-2.jpg"],
     githubUrl: "https://github.com/picklet-team/bevy-game",
     liveUrl: "https://www.youtube.com/watch?v=KUKAEwzjxfY&list=PL2PifUeuI0TDeg8msv-R85gxSZbkj7sVo",
+    video: {
+      title: "Bevy Game Development",
+      embedId: "KUKAEwzjxfY",
+      url: "https://www.youtube.com/watch?v=KUKAEwzjxfY",
+      playlistUrl: "https://www.youtube.com/playlist?list=PL2PifUeuI0TDeg8msv-R85gxSZbkj7sVo",
+      playlistText: "Bevy Game Development Playlist"
+    },
     delay: 0.075,
+  },
+  {
+    id: "pension-website",
+    title: "ペンションWebサイトリニューアル",
+    description: "祖父母が運営するペンションの公式サイトをモダンなデザインで刷新",
+    longDescription: "家族が運営するペンションの古いWebサイトを、モダンなデザインとユーザビリティを重視したサイトにリニューアル。React + TypeScriptを使用して、レスポンシブデザインとSPA体験を実現。実際のビジネスニーズに応えるWeb制作の実践例です。",
+    technologies: ["React", "TypeScript", "Vite", "Redux Toolkit", "React Router"],
+    features: [
+      "SPA（Single Page Application）",
+      "レスポンシブデザイン対応",
+      "Redux Toolkitによる状態管理",
+      "React Routerによるページ遷移",
+      "宿泊プラン詳細表示",
+      "お問い合わせフォーム",
+      "アクセス情報の改善"
+    ],
+    challenges: [
+      "既存顧客の使いやすさを保ちつつモダン化",
+      "ペンションの魅力を効果的に伝えるデザイン",
+      "高齢者にも分かりやすいナビゲーション設計",
+      "実際のビジネス要件との兼ね合い"
+    ],
+    images: ["/projects/pension-1.jpg", "/projects/pension-2.jpg"],
+    liveUrl: "https://visionary-lebkuchen-725bb0.netlify.app/",
+    delay: 0.1,
   },
 ];

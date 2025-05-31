@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 
 const aboutData = {
 	introduction:
-		"電子工学のバックグラウンドを持ち、生体情報の活用研究からコンピューターサイエンスの世界へ。42tokyoでのハンズオン学習を通じて、システムレベルからWebアプリケーションまで幅広い技術領域に取り組んでいます。",
+		"電子工学のバックグラウンド、生体情報の研究からコンピューターサイエンスの世界へ。42tokyoでの学習を通じて、システムレベルからWebアプリケーションまで幅広い技術領域に横断的に取り組んでいます。",
 	skills: [
 		{
 			title: "System Programming",

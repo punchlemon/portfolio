@@ -2,7 +2,6 @@ import { projects } from "@/lib/projects";
 import { ProjectCard } from "@/components/project-card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function ProjectsPage() {
   return (
@@ -31,37 +30,6 @@ export default function ProjectsPage() {
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>
-
-        {/* YouTube Video Section */}
-        <Card className="mb-12">
-          <CardHeader>
-            <CardTitle>開発動画</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="aspect-video">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/KUKAEwzjxfY"
-                title="Bevy Game Development"
-                frameBorder="0"
-                allowFullScreen
-                className="rounded-lg"
-              />
-            </div>
-            <div className="mt-4">
-              <Button variant="outline" asChild>
-                <a 
-                  href="https://www.youtube.com/playlist?list=PL2PifUeuI0TDeg8msv-R85gxSZbkj7sVo" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  プレイリスト全体を見る
-                </a>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );

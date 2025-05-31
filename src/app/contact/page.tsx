@@ -1,7 +1,7 @@
 import { ContactForm } from "@/components/contact-form";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, MapPin, Clock } from "lucide-react";
+import { MapPin, Clock } from "lucide-react";
 import Link from "next/link";
 
 export default function ContactPage() {
@@ -21,7 +21,7 @@ export default function ContactPage() {
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Get In Touch</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            新しいプロジェクトや協力の機会について、お気軽にお問い合わせください。
+            新しいプロジェクトなど、お気軽にお問い合わせください。
           </p>
         </div>
 
@@ -32,14 +32,6 @@ export default function ContactPage() {
             
             <Card>
               <CardContent className="p-6">
-                <div className="flex items-center space-x-4 mb-4">
-                  <Mail className="h-5 w-5 text-primary" />
-                  <div>
-                    <h3 className="font-semibold">Email</h3>
-                    <p className="text-muted-foreground">contact@example.com</p>
-                  </div>
-                </div>
-                
                 <div className="flex items-center space-x-4 mb-4">
                   <MapPin className="h-5 w-5 text-primary" />
                   <div>
