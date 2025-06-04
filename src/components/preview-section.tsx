@@ -1,15 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Preview } from "@/lib/projects";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 interface PreviewSectionProps {
   preview: Preview;
+  className?: string;
 }
 
-export function PreviewSection({ preview }: PreviewSectionProps) {
+export function PreviewSection({ preview, className }: PreviewSectionProps) {
   if (preview.type === 'video') {
     return (
-      <Card className="mb-12">
+      <Card className={cn("mb-12", className)}>
         <CardHeader>
           <CardTitle>{preview.title}</CardTitle>
         </CardHeader>
@@ -26,7 +29,7 @@ export function PreviewSection({ preview }: PreviewSectionProps) {
               className="rounded-lg"
             />
           </div>
-          {preview.playlistUrl && (
+          {preview.playlistUrl && preview.playlistText && (
             <div className="mt-4">
               <Button variant="outline" asChild>
                 <a 
@@ -34,7 +37,7 @@ export function PreviewSection({ preview }: PreviewSectionProps) {
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
-                  {preview.playlistText || "プレイリストを見る"}
+                  {preview.playlistText}
                 </a>
               </Button>
             </div>
@@ -46,31 +49,39 @@ export function PreviewSection({ preview }: PreviewSectionProps) {
 
   if (preview.type === 'website') {
     return (
-      <Card className="mb-12">
+      <Card className={cn("mb-12", className)}>
         <CardHeader>
           <CardTitle>{preview.title}</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="aspect-video border rounded-lg overflow-hidden bg-gray-50">
-            <iframe
-              src={preview.url}
-              title={preview.title}
-              width="100%"
-              height="100%"
-              className="border-0"
-            />
+          <div className="aspect-video border rounded-lg overflow-hidden bg-gray-50 relative">
+            {preview.imageUrl ? (
+              <Image
+                src={preview.imageUrl}
+                alt={`${preview.title} screenshot`}
+                fill
+                className="object-cover rounded-lg"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <p className="text-muted-foreground">Website preview not available</p>
+              </div>
+            )}
           </div>
-          <div className="mt-4">
-            <Button asChild>
-              <a 
-                href={preview.url}
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                サイトを開く
-              </a>
-            </Button>
-          </div>
+          {preview.url && preview.playlistText && (
+            <div className="mt-4">
+              <Button asChild>
+                <a 
+                  href={preview.url}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  {preview.playlistText}
+                </a>
+              </Button>
+            </div>
+          )}
         </CardContent>
       </Card>
     );
