@@ -203,7 +203,7 @@ export const projects: Project[] = [
     images: [
       "/projects/portfolio-website-1.svg",
     ],
-    githubUrl: "https://github.com/your-username/portfolio", // 実際のリポジトリURLに変更してください
+    githubUrl: "https://github.com/punchlemon/portfolio",
     delay: 0.125,
     preview: {
       type: 'website',
