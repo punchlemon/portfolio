@@ -42,6 +42,7 @@ export function ContactForm() {
         toast.error(`送信に失敗しました: ${errorData.error || 'もう一度お試しください'}`);
       }
     } catch (error: unknown) {
+      console.error('Contact form error:', error); // error変数を使用
       toast.error('送信中にエラーが発生しました。');
     } finally {
       setIsSubmitting(false);
