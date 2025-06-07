@@ -8,38 +8,39 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # 1. GitHubリポジトリのソースコードをチェックアウト
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 2. cloudflared (CLIツール)をランナーにインストール
       - name: Install cloudflared
         run: |
           curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
           sudo dpkg -i cloudflared.deb
       
+      # 3. Cloudflare Tunnel経由でラズパイにSSH接続し、デプロイコマンドを実行
       - name: Deploy via Cloudflare Tunnel
         env:
-          TUNNEL_SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          # ここでGitHubの金庫から秘密の情報を読み込む
+          CF_CLIENT_ID: ${{ secrets.CF_CLIENT_ID }}
+          CF_CLIENT_SECRET: ${{ secrets.CF_CLIENT_SECRET }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          # SSHの準備
-          mkdir -p ~/.ssh
-          echo "$TUNNEL_SSH_KEY" > ~/.ssh/id_deploy
-          chmod 600 ~/.ssh/id_deploy
+          # SSHキーを一時ファイルに書き出す
+          echo "$SSH_PRIVATE_KEY" > id_deploy.pem
+          chmod 600 id_deploy.pem
           
-          # SSH設定ファイルを作成し、トンネル経由で接続するよう指示
-          echo "Host ssh.reiji-tanaka.com" > ~/.ssh/config
-          echo "  ProxyCommand cloudflared access ssh --hostname %h" >> ~/.ssh/config
+          # TCPトンネルをバックグラウンドで起動
+          cloudflared access tcp --hostname ssh.reiji-tanaka.com --url localhost:2222 &
+          sleep 3 # トンネルが起動するのを少し待つ
 
-          # 通常のSSHコマンドで、デプロイコマンドを実行
-          # -i で使用する秘密鍵ファイルを指定する
-          ssh -i ~/.ssh/id_deploy reiji@ssh.reiji-tanaka.com '
+          # ローカルポート経由でSSH接続し、ラズパイ上でコマンド実行
+          ssh -p 2222 -o StrictHostKeyChecking=no -i ./id_deploy.pem reiji@localhost '
             set -e
             echo "--- Connected to Raspberry Pi ---"
             cd ~/portfolio-docker
-            echo "--- Pulling latest code ---"
             git pull
-            echo "--- Building and restarting containers ---"
             docker compose up -d --build
-            echo "--- Pruning old images ---"
             docker image prune -a -f
             echo "--- Deployment finished successfully! ---"
           '
