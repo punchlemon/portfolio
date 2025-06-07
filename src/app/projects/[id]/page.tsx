@@ -30,7 +30,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <Button variant="ghost" asChild>
             <Link href="/#projects">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Projects
+              Back to Home
             </Link>
           </Button>
         </div>
