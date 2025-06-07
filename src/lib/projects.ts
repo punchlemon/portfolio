@@ -143,7 +143,7 @@ export const projects: Project[] = [
       type: 'video',
       title: 'Bevy Game Development',
       embedId: 'KUKAEwzjxfY',
-      url: 'https://www.youtube.com/watch?v=KUKAEwzjxfY',
+      url: 'https://www.youtube.com/KUKAEwzjxfY',
       playlistUrl: 'https://www.youtube.com/playlist?list=PL2PifUeuI0TDeg8msv-R85gxSZbkj7sVo',
       playlistText: 'Bevy Game Development Playlist'
     }
@@ -235,7 +235,7 @@ export const projects: Project[] = [
         preview: {
           type: 'video',
           title: 'Portfolio Infrastructure Setup',
-          embedId: 'PLACEHOLDER_VIDEO_ID', // 動画アップロード後に実際のIDに変更
+          embedId: 'jDzx3B2EskA',
           url: 'https://youtu.be/jDzx3B2EskA',
           playlistUrl: 'https://www.youtube.com/playlist?list=PL2PifUeuI0TCoL-snyu92bdwvgoWH_DMg',
           playlistText: 'Self-Hosted Infrastructure Series'
