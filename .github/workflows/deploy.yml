@@ -31,7 +31,11 @@ jobs:
           chmod 600 id_deploy.pem
           
           # TCPトンネルをバックグラウンドで起動
-          cloudflared access tcp --hostname ssh.reiji-tanaka.com --url localhost:2222 &
+          cloudflared access tcp \
+            --hostname ssh.reiji-tanaka.com \
+            --url localhost:2222 \
+            --service-token-id "$CF_CLIENT_ID" \
+            --service-token-secret "$CF_CLIENT_SECRET" &
           sleep 3 # トンネルが起動するのを少し待つ
 
           # ローカルポート経由でSSH接続し、ラズパイ上でコマンド実行
