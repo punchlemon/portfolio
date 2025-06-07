@@ -38,7 +38,6 @@ jobs:
     # 4. ラズパイにデプロイ
     - name: Deploy via SSH
       env:
-        # ここが最重要！GitHub Secretsを環境変数として渡す
         CF_CLIENT_ID: ${{ secrets.CF_CLIENT_ID }}
         CF_CLIENT_SECRET: ${{ secrets.CF_CLIENT_SECRET }}
       run: |
