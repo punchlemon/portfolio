@@ -18,22 +18,33 @@ jobs:
           curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
           sudo dpkg -i cloudflared.deb
       
-      # 3. トンネル経由でデプロイコマンドを実行
+      # 3. Cloudflare Tunnel経由でデプロイコマンドを実行
       - name: Deploy via Cloudflare Tunnel
         env:
+          # GitHubのSecretsに登録した秘密鍵を環境変数として読み込む
           TUNNEL_SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          # 秘密鍵をファイルに書き出す
           echo "$TUNNEL_SSH_KEY" > key.pem
           chmod 600 key.pem
 
-          # cloudflared access を使ってSSHコマンドを実行
+          # ラズパイ上で実行するコマンド群
           cloudflared access ssh --hostname ssh.reiji-tanaka.com --id-file ./key.pem '
-            echo "--- Connected to Raspberry Pi ---"
+            # エラーが発生したら、すぐにスクリプトを停止する
+            set -e
+            
+            echo "--- Executing on Raspberry Pi as user: $(whoami) ---"
+            
             cd ~/portfolio-docker
+            echo "--- Changed to directory: $(pwd) ---"
+            
+            echo "--- Pulling latest code from git ---"
             git pull
-            echo "--- Building and restarting containers ---"
+            
+            echo "--- Building and restarting containers (without sudo) ---"
             docker compose up -d --build
+            
+            echo "--- Pruning old images (without sudo) ---"
             docker image prune -f
-            echo "--- Deployment finished ---"
+            
+            echo "--- Deployment finished successfully! ---"
           '
