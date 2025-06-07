@@ -18,6 +18,12 @@ jobs:
         wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
         sudo dpkg -i cloudflared-linux-amd64.deb
 
+    # 3. SSH秘密鍵をセットアップする
+    - name: Setup SSH Key
+      uses: webfactory/ssh-agent@v0.9.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
     # 3. SSH接続設定を行う
     - name: Setup SSH for Cloudflare Tunnel
       run: |
@@ -36,6 +42,4 @@ jobs:
         CF_CLIENT_ID: ${{ secrets.CF_CLIENT_ID }}
         CF_CLIENT_SECRET: ${{ secrets.CF_CLIENT_SECRET }}
       run: |
-        # ここにデプロイコマンドを記述
-        # 例: ラズパイに接続し、git pullして、ビルドする
         ssh ssh.reiji-tanaka.com "cd /home/reiji/portfolio-docker/web && git pull origin main && docker compose up -d --build && docker image prune -a -f"
