@@ -28,7 +28,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         {/* Back Button */}
         <div className="mb-8">
           <Button variant="ghost" asChild>
-            <Link href="/#projects">
+            <Link href="/">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Home
             </Link>
