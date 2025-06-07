@@ -17,6 +17,9 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Portfolio | Reiji",
   description: "Full-stack developer portfolio",
+  icons: {
+    icon: '/icon.svg',
+  },
 };
 
 export default function RootLayout({
