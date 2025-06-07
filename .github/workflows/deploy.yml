@@ -31,7 +31,7 @@ jobs:
         # ProxyCommandを使うSSH設定を書き込む
         echo "Host ssh.reiji-tanaka.com" > ~/.ssh/config
         echo "  HostName %h" >> ~/.ssh/config
-        echo "  User pi" >> ~/.ssh/config
+        echo "  User reiji" >> ~/.ssh/config
         echo "  ProxyCommand cloudflared access ssh --hostname %h" >> ~/.ssh/config
         chmod 600 ~/.ssh/config
     
