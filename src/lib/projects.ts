@@ -171,12 +171,12 @@ export const projects: Project[] = [
     images: [
       "/projects/sanso-milk-website-1.svg",
     ],
-    liveUrl: "https://visionary-lebkuchen-725bb0.netlify.app/",
+    liveUrl: "https://sanso-milk.jp/",
     delay: 0.1,
     preview: {
       type: 'website',
       title: 'Sanso Milk Website preview',
-      url: 'https://visionary-lebkuchen-725bb0.netlify.app/',
+      url: 'https://sanso-milk.jp/',
       imageUrl: '/projects/sanso-milk-website-screenshot.png',
       playlistText: 'Sanso Milk Website'
     }
