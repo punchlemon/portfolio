@@ -77,6 +77,16 @@ export function Header() {
             >
               Contact
             </Link>
+            <Link
+              href="/articles"
+              className={`text-sm font-medium transition-colors ${
+                isActive("/articles")
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-primary"
+              }`}
+            >
+              Articles
+            </Link>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -143,6 +153,17 @@ export function Header() {
                   onClick={closeMenu}
                 >
                   Contact
+                </Link>
+                <Link
+                  href="/articles"
+                  className={`text-sm font-medium transition-colors py-3 px-2 rounded hover:bg-muted ${
+                    isActive("/articles")
+                      ? "text-primary bg-muted"
+                      : "text-muted-foreground hover:text-primary"
+                  }`}
+                  onClick={closeMenu}
+                >
+                  Articles
                 </Link>
               </nav>
             </motion.div>
