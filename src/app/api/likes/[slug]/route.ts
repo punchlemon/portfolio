@@ -18,14 +18,12 @@ function ensureLikesFile() {
 
 // IP + User-Agent からクライアントIDを生成
 function generateClientId(request: NextRequest): string {
-  // NextRequestからIPアドレスを取得する正しい方法
   const forwardedFor = request.headers.get('x-forwarded-for');
   const realIp = request.headers.get('x-real-ip');
   const ip = forwardedFor?.split(',')[0]?.trim() || realIp || 'unknown';
   
   const userAgent = request.headers.get('user-agent') || 'unknown';
   
-  // IP + User-Agent のハッシュでクライアントを識別
   const identifier = `${ip}-${userAgent}`;
   return crypto.createHash('md5').update(identifier).digest('hex');
 }
@@ -33,14 +31,14 @@ function generateClientId(request: NextRequest): string {
 // GET: いいね数と、このクライアントがいいね済みかを取得
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     ensureLikesFile();
     const data = JSON.parse(fs.readFileSync(LIKES_FILE, 'utf8'));
     
     const clientId = generateClientId(request);
-    const articleSlug = params.slug;
+    const { slug: articleSlug } = await params;
     const userKey = `${clientId}-${articleSlug}`;
     
     return NextResponse.json({ 
@@ -56,14 +54,14 @@ export async function GET(
 // POST: いいねを追加
 export async function POST(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     ensureLikesFile();
     const data = JSON.parse(fs.readFileSync(LIKES_FILE, 'utf8'));
     
     const clientId = generateClientId(request);
-    const articleSlug = params.slug;
+    const { slug: articleSlug } = await params;
     const userKey = `${clientId}-${articleSlug}`;
     
     // 既にいいねしているかチェック
@@ -100,14 +98,14 @@ export async function POST(
 // DELETE: いいねを削除
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     ensureLikesFile();
     const data = JSON.parse(fs.readFileSync(LIKES_FILE, 'utf8'));
     
     const clientId = generateClientId(request);
-    const articleSlug = params.slug;
+    const { slug: articleSlug } = await params;
     const userKey = `${clientId}-${articleSlug}`;
     
     // いいねしていない場合
