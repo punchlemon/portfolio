@@ -1,8 +1,14 @@
 // next.config.ts
 import type { NextConfig } from "next";
+import createMDX from '@next/mdx';
+import remarkGfm from 'remark-gfm';
 
 const nextConfig: NextConfig = {
   output: 'standalone',
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  experimental: {
+    mdxRs: false,
+  },
   async headers() {
     return [
       {
@@ -16,6 +22,22 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      // content内の画像・動画を /content/ パスでアクセス可能にする
+      {
+        source: '/content/:path*',
+        destination: '/api/content/:path*',
+      },
+    ];
+  },
 };
 
-export default nextConfig;
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [],
+  },
+});
+
+export default withMDX(nextConfig);

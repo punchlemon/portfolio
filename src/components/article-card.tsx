@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import Image from "next/image";
 import { Calendar, Clock } from "lucide-react";
 import { Article } from "@/lib/articles";
 
@@ -14,6 +15,18 @@ export function ArticleCard({ article }: ArticleCardProps) {
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow">
       <Link href={`/articles/${article.slug}`}>
+        {/* サムネイル画像 */}
+        {article.thumbnail && (
+          <div className="relative aspect-video">
+            <Image
+              src={article.thumbnail}
+              alt={article.title}
+              fill
+              className="object-cover"
+            />
+          </div>
+        )}
+        
         <CardHeader className="pb-3">
           <CardTitle className="text-lg line-clamp-2 hover:text-primary transition-colors">
             {article.title}

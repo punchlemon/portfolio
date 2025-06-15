@@ -5,18 +5,32 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm'
 import { Article } from "@/lib/articles";
+import { MDXContent } from "./mdx-content";
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import Image from 'next/image';
 
 interface ArticleViewProps {
   article: Article;
+  mdxContent?: MDXRemoteSerializeResult;
 }
 
-export function ArticleView({ article }: ArticleViewProps) {
+export function ArticleView({ article, mdxContent }: ArticleViewProps) {
   return (
     <div className="min-h-screen bg-background pt-20">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
+        {/* サムネイル画像 */}
+        {article.thumbnail && (
+          <div className="relative aspect-video mb-8 rounded-lg overflow-hidden">
+            <Image
+              src={article.thumbnail}
+              alt={article.title}
+              fill
+              className="object-cover"
+            />
+          </div>
+        )}
+
         {/* Back Button */}
         <div className="mb-8">
           <Button variant="ghost" asChild>
@@ -29,70 +43,39 @@ export function ArticleView({ article }: ArticleViewProps) {
 
         {/* Article Header */}
         <header className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-6">{article.title}</h1>
+          <h1 className="text-4xl font-bold mb-4">{article.title}</h1>
+          <p className="text-xl text-muted-foreground mb-6">{article.description}</p>
           
-          <div className="flex flex-wrap items-center gap-4 mb-8">
-            <div className="flex items-center text-sm text-muted-foreground">
-              <Calendar className="w-4 h-4 mr-1" />
+          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
+            <div className="flex items-center">
+              <Calendar className="w-4 h-4 mr-2" />
               {new Date(article.date).toLocaleDateString('ja-JP')}
             </div>
             {article.readTime && (
-              <div className="flex items-center text-sm text-muted-foreground">
-                <Clock className="w-4 h-4 mr-1" />
+              <div className="flex items-center">
+                <Clock className="w-4 h-4 mr-2" />
                 {article.readTime}
               </div>
             )}
           </div>
+
+          <div className="flex flex-wrap gap-2">
+            {article.tags.map((tag) => (
+              <Badge key={tag} variant="secondary">
+                {tag}
+              </Badge>
+            ))}
+          </div>
         </header>
 
         {/* Article Content */}
-        <article className="markdown-content max-w-none mb-12">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            components={{
-              // 外部リンクを新しいタブで開く
-              a: ({ href, children, ...props }) => {
-                const isExternal = href?.startsWith('http');
-                if (isExternal) {
-                  return (
-                    <a 
-                      href={href} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      {...props}
-                    >
-                      {children}
-                    </a>
-                  );
-                }
-                return <a href={href} {...props}>{children}</a>;
-              },
-            }}
-          >
-            {article.content}
-          </ReactMarkdown>
+        <article className="prose prose-lg max-w-none dark:prose-invert mb-12">
+          {mdxContent ? (
+            <MDXContent source={mdxContent} />
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: article.content }} />
+          )}
         </article>
-
-        {/* Tags Section - 下部に配置 */}
-        {article.tags.length > 0 && (
-          <footer className="border-t border-border pt-8">
-            <div className="flex flex-wrap gap-2">
-              {article.tags.map((tag) => (
-                <Badge 
-                  key={tag} 
-                  variant="secondary" 
-                  className="hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer"
-                  asChild
-                >
-                  <Link href={`/articles?tag=${encodeURIComponent(tag)}`}>
-                    {tag}
-                  </Link>
-                </Badge>
-              ))}
-            </div>
-          </footer>
-        )}
-        
       </div>
     </div>
   );
