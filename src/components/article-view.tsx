@@ -25,7 +25,7 @@ export function ArticleView({ article, mdxContent }: ArticleViewProps) {
           <Button variant="ghost" asChild>
             <Link href="/articles">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              記事一覧に戻る
+              Back to Articles
             </Link>
           </Button>
         </div>
