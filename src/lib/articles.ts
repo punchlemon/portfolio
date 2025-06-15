@@ -5,6 +5,7 @@ import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { calculateReadingTime } from './reading-time';
+import remarkGfm from 'remark-gfm'; // GitHub Flavored Markdownプラグインを追加
 
 export interface Article {
   slug: string;
@@ -141,7 +142,11 @@ export async function getArticleWithMDX(slug: string): Promise<{ article: Articl
       thumbnail: hasThumbnail ? `/articles/${slug}/thumbnail.png` : undefined,
     };
 
-    const mdxContent = await serialize(processedContent);
+    const mdxContent = await serialize(processedContent, {
+      mdxOptions: {
+        remarkPlugins: [remarkGfm], // テーブル対応のためのプラグイン
+      },
+    });
 
     return { article, mdxContent };
   } catch (error: unknown) {

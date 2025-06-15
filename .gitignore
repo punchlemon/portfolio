@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# いいねデータ（個人情報を含む可能性があるため）
+data/likes.json
+
+# dataフォルダは残すが、中身は除外
+data/*
+!data/.gitkeep
