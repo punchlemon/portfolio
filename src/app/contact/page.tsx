@@ -1,27 +1,16 @@
 import { ContactForm } from "@/components/contact-form";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Clock } from "lucide-react";
-import Link from "next/link";
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
-        {/* Back Button */}
-        <div className="mb-8">
-          <Button variant="ghost" asChild>
-            <Link href="/">
-              ← Back to Home
-            </Link>
-          </Button>
-        </div>
-
         {/* Contact Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Get In Touch</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            新しいプロジェクトなど、お気軽にお問い合わせください。
+            お気軽にお問い合わせください。
           </p>
         </div>
 

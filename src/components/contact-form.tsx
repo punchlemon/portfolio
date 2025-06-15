@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Send } from "lucide-react";
 import { toast } from "sonner";
 
 export function ContactForm() {
@@ -42,7 +43,7 @@ export function ContactForm() {
         toast.error(`送信に失敗しました: ${errorData.error || 'もう一度お試しください'}`);
       }
     } catch (error: unknown) {
-      console.error('Contact form error:', error); // error変数を使用
+      console.error('Contact form error:', error);
       toast.error('送信中にエラーが発生しました。');
     } finally {
       setIsSubmitting(false);
@@ -104,7 +105,14 @@ export function ContactForm() {
               required
             />
           </div>
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
+          <Button 
+            type="submit" 
+            variant="outline"
+            className="w-full border-foreground text-foreground hover:bg-foreground hover:text-background transition-all duration-200" 
+            size="lg"
+            disabled={isSubmitting}
+          >
+            <Send className="mr-2 h-4 w-4" />
             {isSubmitting ? "Sending..." : "Send Message"}
           </Button>
         </form>
