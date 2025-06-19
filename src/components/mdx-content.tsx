@@ -1,4 +1,6 @@
 // src/components/mdx-content.tsx
+"use client";
+
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { SlideViewer } from './slide-viewer';
 import { ComponentProps } from 'react';
