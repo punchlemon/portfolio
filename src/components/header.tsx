@@ -33,7 +33,7 @@ export function Header() {
         transition={{ duration: 0.6 }}
         className="sticky top-0 z-50 w-full"
       >
-        {/* ヘッダー本体 - 統一されたブラー効果 */}
+        {/* ヘッダー本体 */}
         <div className="h-14 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
           <div className="container mx-auto flex h-full items-center justify-between px-4">
             {/* Logo */}
@@ -100,7 +100,7 @@ export function Header() {
           </div>
         </div>
 
-        {/* Mobile Navigation - ヘッダーと完全に同じブラー効果 */}
+        {/* Mobile Navigation - ヘッダーと統一された透過効果 */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div

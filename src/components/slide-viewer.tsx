@@ -81,7 +81,7 @@ export function SlideViewer({ images }: SlideViewerProps) {
               onClick={() => setCurrentSlide(index)}
               className={`relative flex-shrink-0 w-24 h-16 rounded-lg overflow-hidden transition-all duration-200 ${
                 currentSlide === index
-                  ? 'ring-2 ring-primary ring-offset-2 ring-offset-background scale-105 shadow-lg'
+                  ? 'scale-105 shadow-lg'
                   : 'hover:scale-105 hover:shadow-md opacity-70 hover:opacity-100'
               }`}
             >

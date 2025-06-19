@@ -82,7 +82,7 @@ export function ArticleView({ article, mdxContent }: ArticleViewProps) {
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-6">
             {article.tags.map((tag) => (
-              <Badge key={tag} variant="outline" className="border-foreground text-foreground">
+              <Badge key={tag} variant="outline">
                 {tag}
               </Badge>
             ))}

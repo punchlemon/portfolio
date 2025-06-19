@@ -18,7 +18,9 @@ export function LikeButton({ articleSlug, compact = false }: LikeButtonProps) {
   const hasLiked = data?.hasLiked || false;
   const isLoading = likeMutation.isPending;
 
-  const handleLike = () => {
+  const handleLike = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (isLoading) return;
     likeMutation.mutate(hasLiked);
   };

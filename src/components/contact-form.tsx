@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Send } from "lucide-react";
 import { toast } from "sonner";
 
 export function ContactForm() {
@@ -105,14 +104,7 @@ export function ContactForm() {
               required
             />
           </div>
-          <Button 
-            type="submit" 
-            variant="outline"
-            className="w-full border-foreground text-foreground hover:bg-foreground hover:text-background transition-all duration-200" 
-            size="lg"
-            disabled={isSubmitting}
-          >
-            <Send className="mr-2 h-4 w-4" />
+          <Button type="submit" className="w-full" disabled={isSubmitting}>
             {isSubmitting ? "Sending..." : "Send Message"}
           </Button>
         </form>
